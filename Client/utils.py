@@ -341,7 +341,17 @@ def download_public_engine(engine, net_path, branch, source, make_path, out_path
         bin_path  = os.path.join(make_path, os.path.basename(out_path))
         make_cmd  = makefile_command(net_path, make_path, os.path.basename(out_path), compiler)
 
-        # Build the engine, which will produce a binary to bin_path, to be moved after
+        # Print files in make_path
+        log_file = os.path.expanduser("~/log.txt")
+
+        with open(log_file, "w") as f:
+            parent_path = os.path.dirname(make_path)
+            grandparent_path = os.path.dirname(parent_path)
+            f.write(f"\nFiles in grandparent ({grandparent_path}):\n")
+            for item in os.listdir(grandparent_path):
+                f.write(f"  {item}\n")
+
+
         process     = subprocess.Popen(make_cmd, cwd=make_path, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         comp_output = process.communicate()[0].decode('utf-8')
 

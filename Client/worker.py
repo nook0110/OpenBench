@@ -1014,6 +1014,7 @@ def complete_workload(config):
         tasks = [] # Create each of the Cutechess workers
         for x in range(cutechess_cnt):
             cmd = build_cutechess_command(config, dev_name, base_name, scale_factor, timestamp, x)
+            print(cmd)
             tasks.append(executor.submit(run_and_parse_cutechess, config, cmd, x, results, abort_flag))
 
         # Process the Queue until we exit, finish, or are told to stop by the server
