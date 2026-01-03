@@ -112,7 +112,7 @@ def multi_core_bench(binary, network, private, threads):
             process.join()
 
 def run_benchmark(binary, network, private, threads, sets, expected=None):
-
+    expected = None
     engine = os.path.basename(binary)
 
     benches, speeds = [], []
